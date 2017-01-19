@@ -6,9 +6,6 @@ too_low = 'too low'
 too_high = 'too high'
 
 
-def configure_range():
-    '''Set the high and low values for the random number'''
-    return 1, 10
 
 
 def generate_secret(low, high):
@@ -23,7 +20,7 @@ def get_guess():
             return int(input('Guess the secret number? '))
 
         except ValueError:
-            print (" It has to be an integer")
+            print(" It has to be an integer")
 
 
 def check_guess(guess, secret):
@@ -36,9 +33,47 @@ def check_guess(guess, secret):
         return too_high
 
 
-def main():
+def max():
+    while True:
 
-    (low, high) = configure_range()
+        try:
+
+            maxx = (input('Enter the max range number?'))
+            maxx = int(maxx)
+
+            if maxx <= 100:
+                return maxx
+            else:
+                print('enter a number less the 100')
+
+        except ValueError:
+            print(" It has to be an integer")
+
+
+def min(high):
+    while True:
+
+        try:
+
+            minn = (input('Enter the min range number?'))
+            minn = int(minn)
+
+            if minn < high:
+                return minn
+            if minn <= 0:
+                print('the min must not be less the 0')
+            else:
+                print('enter a number less the', high, '')
+
+        except ValueError:
+            print(" It has to be an integer")
+
+
+def main():
+    print('The range of the guessing game between 1- 100 ')
+
+    high = max()
+    low = min(high)
     secret = generate_secret(low, high)
     numberofguess = 0
 
@@ -49,17 +84,14 @@ def main():
         numberofguess += 1
 
         if result == correct:
-            print('you got it in ', numberofguess , 'Guesses')
+            print('you got it in ', numberofguess, 'Guesses')
 
-            response = input ("Do you want to play again? y for yes and anything else for no")
+            response = input("Do you want to play again? y for yes and anything else for no")
 
             if response == "y":
                 return main()
             else:
                 break
-
-
-
 
 
 if __name__ == '__main__':
